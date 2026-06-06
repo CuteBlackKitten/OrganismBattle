@@ -16,5 +16,9 @@ public class VirusRandomMovement : MonoBehaviour
             Rigidbody.AddForce(new Vector3(random.Next(-180, 180), random.Next(-180, 180), random.Next(-180, 180)) * 0.05f, ForceMode.Impulse);
             ticksCounter = 0;
         }
+        if (YDetector.GetVirusHealth() <= 0) 
+        { 
+            this.enabled = false;
+        }
     }
 }

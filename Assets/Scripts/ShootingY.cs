@@ -14,14 +14,14 @@ public class ShootingY : MonoBehaviour
             if (isLeftShooter)
             {
                 GameObject bullet = Instantiate(Y, Shooter1.position, Quaternion.identity);
-                bullet.GetComponent<Rigidbody>().AddForce(transform.forward * -100f, ForceMode.Impulse);
+                bullet.GetComponent<Rigidbody>().AddForce(transform.forward * -50f, ForceMode.Impulse);
                 Destroy(bullet, 5f);
                 isLeftShooter = false;
             }
             else
             {
                 GameObject bullet = Instantiate(Y, Shooter2.position, Quaternion.identity);
-                bullet.GetComponent<Rigidbody>().AddForce(transform.forward * -100f, ForceMode.Impulse);
+                bullet.GetComponent<Rigidbody>().AddForce(transform.forward * -50f, ForceMode.Impulse);
                 Destroy(bullet, 5f);
                 isLeftShooter = true;
             }
