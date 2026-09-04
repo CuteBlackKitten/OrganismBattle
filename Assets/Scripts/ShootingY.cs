@@ -6,25 +6,43 @@ public class ShootingY : MonoBehaviour
     public Transform Shooter1;
     public Transform Shooter2;
     private bool isLeftShooter = true;
+    private PlayerController controller;
+
+    private void Awake()
+    {
+        controller = new PlayerController();
+    }
 
     private void FixedUpdate()
     {
-        if (Input.GetMouseButton(0))
+        controller.PlayerMap.Shoot.performed += _ => Shoot();
+    }
+
+    public void Shoot() 
+    {
+        if (isLeftShooter)
         {
-            if (isLeftShooter)
-            {
-                GameObject bullet = Instantiate(Y, Shooter1.position, Quaternion.identity);
-                bullet.GetComponent<Rigidbody>().AddForce(transform.forward * -50f, ForceMode.Impulse);
-                Destroy(bullet, 5f);
-                isLeftShooter = false;
-            }
-            else
-            {
-                GameObject bullet = Instantiate(Y, Shooter2.position, Quaternion.identity);
-                bullet.GetComponent<Rigidbody>().AddForce(transform.forward * -50f, ForceMode.Impulse);
-                Destroy(bullet, 5f);
-                isLeftShooter = true;
-            }
+            GameObject bullet = Instantiate(Y, Shooter1.position, Quaternion.identity);
+            bullet.GetComponent<Rigidbody>().AddForce(transform.forward * -50f, ForceMode.Impulse);
+            Destroy(bullet, 5f);
+            isLeftShooter = false;
         }
+        else
+        {
+            GameObject bullet = Instantiate(Y, Shooter2.position, Quaternion.identity);
+            bullet.GetComponent<Rigidbody>().AddForce(transform.forward * -50f, ForceMode.Impulse);
+            Destroy(bullet, 5f);
+            isLeftShooter = true;
+        }
+    }
+
+    private void OnEnable()
+    {
+        controller.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controller.Disable();
     }
 }

@@ -3,17 +3,36 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Rigidbody Rigidbody;
+    private PlayerController controller;
+    public Rigidbody rigidbody;
+
+    private void Awake()
+    {
+        controller = new PlayerController();
+    }
 
     private void FixedUpdate()
     {
-        if (Input.GetKey("w") || Input.GetKey("up")) 
+        if (controller != null && rigidbody != null) 
         {
-            Rigidbody.AddForce(-transform.forward, ForceMode.Impulse);
+            if (controller.PlayerMap.Forward.ReadValue<float>() >= 0.5f)
+            {
+                rigidbody.AddForce(-transform.forward, ForceMode.Impulse);
+            }
+            if (controller.PlayerMap.Backward.ReadValue<float>() >= 0.5f)
+            {
+                rigidbody.AddForce(transform.forward, ForceMode.Impulse);
+            }
         }
-        if (Input.GetKey("s") || Input.GetKey("down"))
-        {
-            Rigidbody.AddForce(transform.forward, ForceMode.Impulse);
-        }
+    }
+
+    private void OnEnable()
+    {
+        controller.Enable();
+    }
+
+    private void OnDisable() 
+    {
+        controller.Disable();
     }
 }

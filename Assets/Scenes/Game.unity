@@ -1481,7 +1481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 521be405be4c038409925fb476c60ff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  Rigidbody: {fileID: 3225376947201248093}
+  rigidbody: {fileID: 3225376947201248093}
 --- !u!114 &3225376947201248096
 MonoBehaviour:
   m_ObjectHideFlags: 0
