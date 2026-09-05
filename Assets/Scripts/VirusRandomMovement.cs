@@ -7,6 +7,7 @@ public class VirusRandomMovement : MonoBehaviour
     public int ticksToMove = 0;
     public Rigidbody Rigidbody;
     System.Random random = new System.Random();
+    private int Score;
 
     public void FixedUpdate()
     {
@@ -17,7 +18,9 @@ public class VirusRandomMovement : MonoBehaviour
             ticksCounter = 0;
         }
         if (YDetector.GetVirusHealth() <= 0) 
-        { 
+        {
+            Score += 1;
+            GlobalVariableHolder.SetScore(Score);
             this.enabled = false;
         }
     }
